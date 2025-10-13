@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Features — MediRemainder</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-start: #d5f4f9;
+  --bg-end: #dbd9de;
+  --teal-start: #26c6da;
+  --teal-end: #009688;
+  --text-main: #03363d;
+  --text-muted: #546e7a;
+  --glass-bg: rgba(255,255,255,0.7);
+}
+
+/* ===== BASE ===== */
+* { margin:0; padding:0; box-sizing:border-box; font-family:'Inter',sans-serif; }
+html, body { height:100%; background: linear-gradient(135deg, var(--bg-start), var(--bg-end)); overflow-x:hidden; color: var(--text-main); }
+
+/* ===== HERO SECTION ===== */
+.hero {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  padding: 50px 20px;
+}
+
+/* ===== FLOATING BUBBLES ===== */
+.particles { position:absolute; inset:0; z-index:0; pointer-events:none; }
+.bubble {
+  position:absolute;
+  border-radius:50%;
+  background: rgba(38,198,218,0.25);
+  animation: float linear infinite;
+}
+@keyframes float {
+  0% { transform: translateY(0) scale(var(--scale)); opacity:0.3; }
+  50% { opacity:0.6; }
+  100% { transform: translateY(-120vh) scale(var(--scale)); opacity:0; }
+}
+
+/* ===== GLASS CARD ===== */
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  border-radius: 32px;
+  padding: 60px 40px;
+  width: 100%;
+  max-width: 1200px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+/* ===== HERO TITLE ===== */
+.hero-title {
+  font-family: 'Poppins', sans-serif;
+  font-size: 2.8rem;
+  font-weight: 800;
+  margin-bottom: 15px;
+  text-align: center;
+  color: var(--text-main);
+}
+.hero-title .shine { color: var(--teal-start); text-shadow:0 2px 14px rgba(255,255,255,0.7); }
+
+.hero-sub {
+  font-size: 1.2rem;
+  margin-bottom: 50px;
+  color: var(--text-muted);
+  max-width: 850px;
+  text-align: center;
+}
+
+/* ===== FEATURE CARDS ===== */
+.features {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 30px;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.feature-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  border-radius: 32px;
+  padding: 40px 20px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+  text-align: center;
+  transition: all 0.35s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.feature-card::before {
+  content: "⚕";
+  display: block;
+  font-size: 2.2rem;
+  margin-bottom: 18px;
+  color: var(--teal-start);
+}
+
+.feature-card h4 {
+  margin-bottom: 12px;
+  color: var(--teal-end);
+  font-weight: 700;
+  font-size: 1.3rem;
+}
+
+.feature-card p {
+  color: var(--text-muted);
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.feature-card:hover {
+  transform: translateY(-8px) scale(1.05);
+  box-shadow: 0 18px 45px rgba(0,0,0,0.2), 0 0 15px var(--teal-start);
+}
+
+.feature-card::after {
+  content: "";
+  position: absolute;
+  top: -50%; left: -50%;
+  width: 200%; height: 200%;
+  background: radial-gradient(circle at top left, rgba(255,255,255,0.4), transparent 70%);
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+
+.feature-card:hover::after { opacity: 1; }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width:1000px) { .features { grid-template-columns: 1fr 1fr; } }
+@media (max-width:650px) { .features { grid-template-columns: 1fr; } }
+
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="particles" id="particles"></div>
+
+  <div class="glass">
+    <h1 class="hero-title">MediRemainder <span class="shine">Features</span></h1>
+    <p class="hero-sub">
+      Designed to make your life easier, safer, and healthier. Explore our key features:
+    </p>
+
+    <div class="features">
+      <article class="feature-card">
+        <h4>Smart Reminders</h4>
+        <p>Personalized notifications for every medication, ensuring you never miss a dose.</p>
+      </article>
+      <article class="feature-card">
+        <h4>Caregiver Sync</h4>
+        <p>Share schedules and updates with family or caregivers for better coordination.</p>
+      </article>
+      <article class="feature-card">
+        <h4>Progress Tracking</h4>
+        <p>Monitor your adherence with clear, easy-to-read progress reports and insights.</p>
+      </article>
+      <article class="feature-card">
+        <h4>Medication History</h4>
+        <p>Access your past medication logs and history anytime, securely stored in-app.</p>
+      </article>
+      <article class="feature-card">
+        <h4>Health Insights</h4>
+        <p>Understand trends and make informed health decisions with actionable data.</p>
+      </article>
+      <article class="feature-card">
+        <h4>Notifications & Alerts</h4>
+        <p>Receive alerts when a medication is running low or requires refills.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<script>
+const container = document.getElementById('particles');
+for(let i=0;i<30;i++){
+  const b = document.createElement('div');
+  b.classList.add('bubble');
+  const size = Math.random()*60 + 10; // 10–70px
+  b.style.width = b.style.height = size+'px';
+  b.style.setProperty('--scale', (size/20).toFixed(2));
+  b.style.left = Math.random()*100+'vw';
+  b.style.top = Math.random()*100+'vh';
+  const duration = 10 + Math.random()*15; // 10–25s
+  const delay = Math.random()*-duration;
+  b.style.animationDuration = duration+'s';
+  b.style.animationDelay = delay+'s';
+  container.appendChild(b);
+}
+</script>
+
+</body>
+</html>

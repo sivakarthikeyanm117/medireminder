@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>How It Works — MediReminder</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+/* ===== THEME COLORS ===== */
+:root {
+  --primary-start: #26c6da;
+  --primary-end: #009688;
+  --bg-start: #d5f4f9;
+  --bg-end: #dbd9de;
+  --text-dark: #03363d;
+  --text-muted: #546e7a;
+  --glass: rgba(255,255,255,0.7);
+  --particle-color: rgba(38,198,218,0.25);
+}
+
+/* ===== BASE ===== */
+* { margin:0; padding:0; box-sizing:border-box; cursor: default; }
+html, body { height: 100%; font-family:'Inter',sans-serif; background: linear-gradient(135deg, var(--bg-start), var(--bg-end)); color: var(--text-dark); overflow-x:hidden; }
+
+/* ===== HERO ===== */
+.hero {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 50px 20px;
+}
+.particles { position:absolute; inset:0; z-index:0; pointer-events:none; }
+.bubble {
+  position:absolute;
+  border-radius:50%;
+  background: var(--particle-color);
+  animation: float linear infinite;
+}
+@keyframes float {
+  0% { transform: translateY(0) scale(var(--scale)); opacity:0.3; }
+  50% { opacity:0.6; }
+  100% { transform: translateY(-120vh) scale(var(--scale)); opacity:0; }
+}
+
+/* ===== GLASS PANEL ===== */
+.glass {
+  background: var(--glass);
+  backdrop-filter: blur(20px);
+  border-radius: 32px;
+  padding: 60px;
+  width: 100%;
+  max-width: 1000px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.glass:hover { 
+  transform: translateY(-4px) scale(1.02); 
+  box-shadow: 0 30px 60px rgba(0,0,0,0.15), 0 0 15px var(--primary-start);
+}
+.glass::after {
+  content:"";
+  position:absolute;
+  top:0; left:0;
+  width:100%; height:100%;
+  border-radius:32px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.25), transparent 70%);
+  pointer-events:none;
+}
+
+/* ===== HERO TITLE & SUBTITLE ===== */
+.hero-title {
+  font-family:'Poppins',sans-serif;
+  font-size:3rem;
+  font-weight:800;
+  margin-bottom:15px;
+  line-height:1.2;
+  text-align:center;
+}
+.hero-title .shine {
+  background: linear-gradient(45deg, var(--primary-start), var(--primary-end));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.hero-sub {
+  font-size:1.2rem;
+  margin-bottom:50px;
+  color: var(--text-muted);
+  max-width:850px;
+  text-align:center;
+  word-wrap:break-word;
+}
+
+/* ===== STEP CARDS ===== */
+.steps {
+  display:grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 30px;
+  width: 100%;
+  margin-top: 20px;
+  counter-reset: step;
+}
+.step-card {
+  background: rgba(255,255,255,0.8);
+  backdrop-filter: blur(12px);
+  border-radius:28px;
+  padding:30px 20px;
+  box-shadow:0 12px 35px rgba(0,0,0,0.15);
+  text-align:center;
+  transition: all 0.35s ease;
+  position: relative;
+}
+.step-card::before {
+  content: counter(step);
+  counter-increment: step;
+  display: inline-block;
+  font-size:2rem;
+  font-weight:700;
+  color: var(--primary-end);
+  margin-bottom:15px;
+}
+.step-card h4 {
+  margin-bottom:12px;
+  color: var(--primary-end);
+  font-weight:700;
+  font-size:1.3rem;
+}
+.step-card p {
+  color: var(--text-muted);
+  font-size:1rem;
+  line-height:1.5;
+}
+.step-card:hover {
+  transform: translateY(-10px) scale(1.05);
+  box-shadow:0 18px 45px rgba(0,0,0,0.2);
+}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:900px){
+  .steps { grid-template-columns: 1fr; }
+  .hero-title { font-size: 2.2rem; }
+}
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="particles" id="particles"></div>
+  <div class="glass">
+    <h1 class="hero-title">How <span class="shine">MediReminder</span> Works</h1>
+    <p class="hero-sub">
+      MediReminder helps you stay on top of your medication schedule effortlessly. Here’s a clear step-by-step guide:
+    </p>
+
+    <div class="steps">
+      <article class="step-card">
+        <h4>Set Your Medication</h4>
+        <p>Enter all your medications, dosage information, and timing. Customize reminders for each one.</p>
+      </article>
+      <article class="step-card">
+        <h4>Receive Smart Notifications</h4>
+        <p>Get timely notifications on your device. Clear, friendly, and actionable reminders help you never miss a dose.</p>
+      </article>
+      <article class="step-card">
+        <h4>Track & Share Progress</h4>
+        <p>View your medication history and progress reports. Share schedules with caregivers or family members easily.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<script>
+const container = document.getElementById('particles');
+for(let i=0;i<30;i++){
+  const b=document.createElement('div');
+  b.classList.add('bubble');
+  const size = Math.random()*60+10; // large bubbles
+  b.style.width = b.style.height = size+'px';
+  b.style.setProperty('--scale', (size/20).toFixed(2));
+  b.style.left = Math.random()*100+'vw';
+  b.style.top = Math.random()*100+'vh';
+  const duration = 10 + Math.random()*15;
+  const delay = Math.random()*-duration;
+  b.style.animationDuration = duration+'s';
+  b.style.animationDelay = delay+'s';
+  container.appendChild(b);
+}
+</script>
+
+</body>
+</html>
