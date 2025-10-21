@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Register - MediRemainder</title>
+    <style>
+      body{font-family:Inter, sans-serif;background:#f0f6f8;padding:40px}
+      .card{max-width:420px;margin:40px auto;padding:30px;background:#fff;border-radius:12px;box-shadow:0 6px 18px rgba(0,0,0,0.08)}
+      input{width:100%;padding:12px;margin:8px 0;border-radius:8px;border:1px solid #ddd}
+      button{width:100%;padding:12px;border-radius:8px;border:none;background:#00a89a;color:#fff;font-weight:700}
+      .muted{color:#666;font-size:0.95rem}
+      .msg{padding:8px;border-radius:6px;margin-bottom:10px}
+      .success{background:#e6fffa;color:#064e3b}
+      .danger{background:#ffe6e6;color:#7a1222}
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <h2>Create account</h2>
+      <p class="muted">Choose a simple username and password</p>
+
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          {% for category, msg in messages %}
+            <div class="msg {{ category }}">{{ msg }}</div>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+
+      <form method="post" action="/register">
+        <input name="username" placeholder="Username" autofocus required>
+        <input name="password" placeholder="Password" type="password" required>
+        <input name="password2" placeholder="Repeat Password" type="password" required>
+        <button type="submit">Register</button>
+      </form>
+
+      <p style="margin-top:12px">Already have an account? <a href="/login">Login</a></p>
+    </div>
+  </body>
+</html>

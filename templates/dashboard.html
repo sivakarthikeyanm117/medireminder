@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dashboard - MediRemainder</title>
+    <style>
+      body{font-family:Inter, sans-serif;background:#f7fcfd;padding:40px}
+      .wrap{max-width:800px;margin:40px auto}
+      .card{background:#fff;padding:20px;border-radius:10px;box-shadow:0 8px 20px rgba(0,0,0,0.06)}
+      a.btn{display:inline-block;margin-top:10px;padding:10px 14px;background:#00a89a;color:#fff;border-radius:8px;text-decoration:none}
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="card">
+        <h2>Welcome, {{ username }}</h2>
+        <p>You're logged in. From here you can manage reminders.</p>
+        <p><a class="btn" href="/logout">Logout</a></p>
+      </div>
+    </div>
+  </body>
+</html>
