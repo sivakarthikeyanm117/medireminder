@@ -1,1 +1,2 @@
 pywhatkit==5.3
+python-telegram-bot==20.7

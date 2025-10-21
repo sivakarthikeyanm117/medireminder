@@ -24,6 +24,25 @@ html, body {
   background: linear-gradient(135deg, var(--bg-start), var(--bg-end)); 
   color: var(--text-dark); 
   overflow-x: hidden;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Touch-friendly interactions */
+button, .auth-btn, .shop-btn {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+/* Smooth scrolling for mobile */
+html {
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
 }
 
 /* ===== FLOATING BUBBLES ===== */
@@ -262,17 +281,361 @@ footer {
   to { opacity:1; transform:translateY(0); }
 }
 
+/* ===== REMINDER FORM ===== */
+.reminder-form-section {
+  padding: 60px;
+  background: var(--glass);
+  backdrop-filter: blur(20px);
+  margin: 20px;
+  border-radius: 32px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+}
+
+.form-container h2 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 30px;
+  color: var(--primary-end);
+  text-align: center;
+}
+
+.reminder-form {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 12px 15px;
+  border: 2px solid #e9ecef;
+  border-radius: 10px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(38, 198, 218, 0.1);
+}
+
+.notification-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  margin: 20px 0;
+}
+
+.notification-option {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  border: 2px solid #e9ecef;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.notification-option:hover {
+  border-color: var(--primary);
+  background: rgba(38, 198, 218, 0.05);
+}
+
+.notification-option input[type="checkbox"] {
+  margin-right: 10px;
+  transform: scale(1.2);
+}
+
+.notification-option.selected {
+  border-color: var(--primary);
+  background: rgba(38, 198, 218, 0.1);
+}
+
+/* ===== REMINDERS LIST ===== */
+.reminders-section {
+  padding: 60px;
+  background: var(--glass);
+  backdrop-filter: blur(20px);
+  margin: 20px;
+  border-radius: 32px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+}
+
+.reminders-container h2 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 30px;
+  color: var(--primary-end);
+  text-align: center;
+}
+
+.reminders-list {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.reminder-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  border: 2px solid #e9ecef;
+  border-radius: 15px;
+  margin-bottom: 15px;
+  background: white;
+  transition: all 0.3s ease;
+}
+
+.reminder-item:hover {
+  border-color: var(--primary);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.reminder-info h3 {
+  color: var(--text-dark);
+  margin-bottom: 5px;
+  font-size: 1.2rem;
+}
+
+.reminder-info p {
+  color: #6c757d;
+  font-size: 0.9rem;
+  margin: 2px 0;
+}
+
+.reminder-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.btn {
+  border: none;
+  padding: 8px 15px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+}
+
+.btn-success {
+  background: var(--success);
+  color: white;
+}
+
+.btn-danger {
+  background: var(--danger);
+  color: white;
+}
+
+.btn-secondary {
+  background: #6c757d;
+  color: white;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
 /* ===== RESPONSIVE ===== */
 @media(max-width:768px){
-  header { padding:20px 30px; margin:10px; }
-  .hero h1 { font-size:2.5rem; }
-  .hero .subtitle { font-size:1.2rem; }
-  .hero .description { font-size:1rem; }
-  .shop-section { padding:40px 30px; }
-  .shop-section h2 { font-size:2rem; }
-  .features { padding:60px 30px; }
-  .auth-buttons { flex-direction:column; gap:10px; }
-  .auth-btn { padding:10px 20px; font-size:0.9rem; }
+  header { 
+    padding:15px 20px; 
+    margin:10px; 
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+  }
+  
+  .logo {
+    font-size: 1.5rem;
+  }
+  
+  .auth-buttons { 
+    flex-direction: row; 
+    gap: 10px; 
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  .auth-btn { 
+    padding: 12px 20px; 
+    font-size: 0.9rem;
+    min-width: 120px;
+  }
+  
+  .hero { 
+    padding: 40px 20px 30px;
+  }
+  
+  .hero h1 { 
+    font-size: 2.2rem;
+    line-height: 1.1;
+    margin-bottom: 15px;
+  }
+  
+  .hero .subtitle { 
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+  }
+  
+  .hero .description { 
+    font-size: 0.95rem;
+    margin-bottom: 30px;
+    line-height: 1.5;
+  }
+  
+  .shop-section { 
+    padding: 30px 20px; 
+  }
+  
+  .shop-section h2 { 
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+  }
+  
+  .shop-section p {
+    font-size: 1rem;
+    margin-bottom: 25px;
+  }
+  
+  .shop-btn {
+    padding: 15px 30px;
+    font-size: 1rem;
+    width: 100%;
+    max-width: 280px;
+  }
+  
+  .features { 
+    padding: 40px 20px;
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+  
+  .feature-card {
+    padding: 25px 20px;
+  }
+  
+  .feature-icon {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+  }
+  
+  .feature-title {
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+  }
+  
+  .feature-desc {
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+  
+  .reminder-form-section,
+  .reminders-section {
+    padding: 30px 20px;
+    margin: 10px;
+  }
+  
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+  
+  .notification-options {
+    grid-template-columns: 1fr;
+  }
+  
+  .reminder-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+  
+  .reminder-actions {
+    width: 100%;
+    justify-content: space-between;
+  }
+  
+  footer {
+    padding: 25px 20px;
+    margin: 40px 10px 10px;
+    font-size: 0.85rem;
+  }
+}
+
+@media(max-width:480px){
+  header {
+    padding: 12px 15px;
+    margin: 8px;
+  }
+  
+  .logo {
+    font-size: 1.3rem;
+  }
+  
+  .auth-btn {
+    padding: 10px 15px;
+    font-size: 0.85rem;
+    min-width: 100px;
+  }
+  
+  .hero {
+    padding: 30px 15px 25px;
+  }
+  
+  .hero h1 {
+    font-size: 1.9rem;
+  }
+  
+  .hero .subtitle {
+    font-size: 1rem;
+  }
+  
+  .hero .description {
+    font-size: 0.9rem;
+  }
+  
+  .shop-section {
+    padding: 25px 15px;
+  }
+  
+  .shop-section h2 {
+    font-size: 1.6rem;
+  }
+  
+  .features {
+    padding: 30px 15px;
+  }
+  
+  .feature-card {
+    padding: 20px 15px;
+  }
 }
 
 @media(min-width:1400px){
@@ -320,6 +683,78 @@ footer {
   <a href="about.html" class="shop-btn">Learn More</a>
 </section>
 
+<!-- Add Reminder Form -->
+<section class="reminder-form-section">
+  <div class="form-container">
+    <h2>💊 Add Medication Reminder</h2>
+    <form id="reminderForm" class="reminder-form">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="medication">Medication Name</label>
+          <input type="text" id="medication" name="medication" placeholder="e.g., Paracetamol" required>
+        </div>
+        <div class="form-group">
+          <label for="dose">Dosage</label>
+          <input type="text" id="dose" name="dose" placeholder="e.g., 500mg" required>
+        </div>
+      </div>
+      
+      <div class="form-row">
+        <div class="form-group">
+          <label for="date">Date</label>
+          <input type="date" id="date" name="date" required>
+        </div>
+        <div class="form-group">
+          <label for="time">Time</label>
+          <input type="time" id="time" name="time" required>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label for="phone">Phone Number (for WhatsApp)</label>
+        <input type="tel" id="phone" name="phone" placeholder="+1234567890" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="notes">Additional Notes</label>
+        <textarea id="notes" name="notes" rows="3" placeholder="Any special instructions..."></textarea>
+      </div>
+      
+      <div class="notification-options">
+        <div class="notification-option selected" onclick="toggleNotification(this, 'telegram')">
+          <input type="checkbox" id="telegram" name="telegram" checked>
+          <label for="telegram">📲 Telegram (Main notifications - Simple setup)</label>
+        </div>
+        <div class="notification-option" onclick="toggleNotification(this, 'whatsapp')">
+          <input type="checkbox" id="whatsapp" name="whatsapp">
+          <label for="whatsapp">📱 WhatsApp (Backup option)</label>
+        </div>
+      </div>
+      
+      <button type="submit" class="btn">💊 Add Reminder</button>
+      
+      <div style="text-align: center; margin-top: 20px;">
+        <button type="button" class="btn" style="background: #0088cc; color: white;" onclick="setupTelegram()">
+          📲 Setup Telegram (One-time)
+        </button>
+        <button type="button" class="btn" style="background: #25D366; color: white; margin-left: 10px;" onclick="testWhatsApp()">
+          📱 Test WhatsApp
+        </button>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- Reminders List -->
+<section class="reminders-section">
+  <div class="reminders-container">
+    <h2>📋 Your Reminders</h2>
+    <div id="remindersList" class="reminders-list">
+      <p style="text-align: center; color: #6c757d; padding: 40px;">No reminders yet. Add your first reminder above!</p>
+    </div>
+  </div>
+</section>
+
 <!-- Features Section -->
 <section class="features">
   <div class="feature-card">
@@ -345,21 +780,393 @@ footer {
 </footer>
 
 <script>
-const container = document.getElementById('particles');
-for(let i=0;i<40;i++){
-  const b = document.createElement('div');
-  b.classList.add('bubble');
-  const size = Math.random()*60+15;
-  b.style.width = b.style.height = size+'px';
-  b.style.setProperty('--scale', (size/20).toFixed(2));
-  b.style.left = Math.random()*100+'vw';
-  b.style.top = Math.random()*100+'vh';
-  const duration = 12 + Math.random()*18;
-  const delay = Math.random()*-duration;
-  b.style.animationDuration = duration+'s';
-  b.style.animationDelay = delay+'s';
-  container.appendChild(b);
+// MediRemainder App - Compact & Optimized
+class MediRemainder {
+    constructor() {
+        this.reminders = JSON.parse(localStorage.getItem('reminders')) || [];
+        this.telegramToken = "8383719479:AAH_Utq0CT_tUUx7cEE6V2kupMC8mZB-x2M";
+        this.init();
+    }
+
+    init() {
+        this.createParticles();
+        this.updateStats();
+        this.setupWhatsApp();
+        this.setupForm();
+        this.displayReminders();
+        this.setMinDate();
+    }
+
+    setMinDate() {
+        const today = new Date().toISOString().split('T')[0];
+        const dateInput = document.getElementById('date');
+        if (dateInput) dateInput.min = today;
+    }
+
+    setupForm() {
+        const form = document.getElementById('reminderForm');
+        if (form) {
+            form.addEventListener('submit', (e) => this.handleFormSubmit(e));
+        }
+    }
+
+    handleFormSubmit(e) {
+        e.preventDefault();
+        const formData = new FormData(e.target);
+        
+        const reminder = {
+            id: Date.now(),
+            medication: formData.get('medication'),
+            dose: formData.get('dose'),
+            date: formData.get('date'),
+            time: formData.get('time'),
+            phone: formData.get('phone'),
+            notes: formData.get('notes'),
+            notifications: {
+                whatsapp: formData.get('whatsapp') === 'on',
+                telegram: formData.get('telegram') === 'on'
+            },
+            status: 'active',
+            created: new Date().toISOString()
+        };
+
+        this.reminders.push(reminder);
+        localStorage.setItem('reminders', JSON.stringify(this.reminders));
+        
+        this.sendNotifications(reminder);
+        this.updateStats();
+        this.displayReminders();
+        this.showSuccess();
+        
+        e.target.reset();
+    }
+
+    sendNotifications(reminder) {
+        if (reminder.notifications.whatsapp) {
+            this.sendWhatsAppReminder(reminder);
+        }
+        if (reminder.notifications.telegram) {
+            this.sendTelegramReminder(reminder);
+        }
+    }
+
+    displayReminders() {
+        const container = document.getElementById('remindersList');
+        if (!container) return;
+
+        if (this.reminders.length === 0) {
+            container.innerHTML = '<p style="text-align: center; color: #6c757d; padding: 40px;">No reminders yet. Add your first reminder above!</p>';
+            return;
+        }
+
+        container.innerHTML = this.reminders.map(reminder => `
+            <div class="reminder-item">
+                <div class="reminder-info">
+                    <h3>💊 ${reminder.medication}</h3>
+                    <p><strong>Dose:</strong> ${reminder.dose} | <strong>Date:</strong> ${reminder.date} | <strong>Time:</strong> ${reminder.time}</p>
+                    <p><strong>Notifications:</strong> ${this.getNotificationTypes(reminder.notifications)}</p>
+                    ${reminder.notes ? `<p><strong>Notes:</strong> ${reminder.notes}</p>` : ''}
+                </div>
+                <div class="reminder-actions">
+                    <button class="btn btn-success" onclick="app.markCompleted(${reminder.id})">✅ Done</button>
+                    <button class="btn btn-secondary" onclick="app.editReminder(${reminder.id})">✏️ Edit</button>
+                    <button class="btn btn-danger" onclick="app.deleteReminder(${reminder.id})">🗑️ Delete</button>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    getNotificationTypes(notifications) {
+        const types = [];
+        if (notifications.whatsapp) types.push('WhatsApp');
+        if (notifications.telegram) types.push('Telegram');
+        return types.join(', ');
+    }
+
+    markCompleted(id) {
+        const reminder = this.reminders.find(r => r.id === id);
+        if (reminder) {
+            reminder.status = 'completed';
+            localStorage.setItem('reminders', JSON.stringify(this.reminders));
+            this.updateStats();
+            this.displayReminders();
+        }
+    }
+
+    deleteReminder(id) {
+        if (confirm('Are you sure you want to delete this reminder?')) {
+            this.reminders = this.reminders.filter(r => r.id !== id);
+            localStorage.setItem('reminders', JSON.stringify(this.reminders));
+            this.updateStats();
+            this.displayReminders();
+        }
+    }
+
+    editReminder(id) {
+        const reminder = this.reminders.find(r => r.id === id);
+        if (reminder) {
+            document.getElementById('medication').value = reminder.medication;
+            document.getElementById('dose').value = reminder.dose;
+            document.getElementById('date').value = reminder.date;
+            document.getElementById('time').value = reminder.time;
+            document.getElementById('phone').value = reminder.phone;
+            document.getElementById('notes').value = reminder.notes || '';
+            document.getElementById('whatsapp').checked = reminder.notifications.whatsapp;
+            document.getElementById('telegram').checked = reminder.notifications.telegram;
+            
+            this.deleteReminder(id);
+            document.querySelector('.reminder-form-section').scrollIntoView({ behavior: 'smooth' });
+        }
+    }
+
+    showSuccess() {
+        alert('✅ Reminder added successfully! You will receive notifications.');
+    }
+
+    createParticles() {
+        const container = document.getElementById('particles');
+        for(let i=0;i<40;i++){
+            const b = document.createElement('div');
+            b.classList.add('bubble');
+            const size = Math.random()*60+15;
+            b.style.width = b.style.height = size+'px';
+            b.style.setProperty('--scale', (size/20).toFixed(2));
+            b.style.left = Math.random()*100+'vw';
+            b.style.top = Math.random()*100+'vh';
+            const duration = 12 + Math.random()*18;
+            const delay = Math.random()*-duration;
+            b.style.animationDuration = duration+'s';
+            b.style.animationDelay = delay+'s';
+            container.appendChild(b);
+        }
+    }
+
+    setupWhatsApp() {
+        // Add WhatsApp integration to existing buttons
+        const shopBtn = document.querySelector('.shop-btn');
+        if (shopBtn) {
+            shopBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                this.openWhatsApp();
+            });
+        }
+    }
+
+    openWhatsApp() {
+        const message = `🏥 *MediRemainder - Health Companion*
+
+Never miss your medication again! 
+
+📱 *Features:*
+• Smart medication reminders
+• WhatsApp & Telegram integration
+• Mobile-responsive design
+• Health tracking
+
+Get started: ${window.location.href}
+
+Stay healthy! 💊`;
+        
+        const whatsappUrl = `https://web.whatsapp.com/send?text=${encodeURIComponent(message)}`;
+        window.open(whatsappUrl, '_blank');
+    }
+
+    addReminder(medication, dose, date, time, phone) {
+        const reminder = {
+            id: Date.now(),
+            medication, dose, date, time, phone,
+            status: 'active',
+            created: new Date().toISOString()
+        };
+        
+        this.reminders.push(reminder);
+        localStorage.setItem('reminders', JSON.stringify(this.reminders));
+        
+        // Send WhatsApp reminder
+        this.sendWhatsAppReminder(reminder);
+        this.updateStats();
+        
+        alert('✅ Reminder added! WhatsApp will open for confirmation.');
+    }
+
+    sendWhatsAppReminder(reminder) {
+        const message = `💊 Medication Reminder
+
+Time to take: ${reminder.medication}
+Dosage: ${reminder.dose}
+Date: ${reminder.date}
+Time: ${reminder.time}
+
+Stay healthy! 🏥`;
+        
+        // Clean phone number - remove all non-digits
+        let phone = reminder.phone.replace(/\D/g, '');
+        
+        // Add country code if not present
+        if (!phone.startsWith('91') && phone.length === 10) {
+            phone = '91' + phone; // Add India country code
+        }
+        
+        // Try multiple WhatsApp methods
+        const methods = [
+            `https://wa.me/${phone}?text=${encodeURIComponent(message)}`,
+            `https://web.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(message)}`,
+            `https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(message)}`
+        ];
+        
+        // Try first method
+        try {
+            window.open(methods[0], '_blank');
+        } catch (error) {
+            // Fallback to second method
+            try {
+                window.open(methods[1], '_blank');
+            } catch (error2) {
+                // Final fallback
+                window.open(methods[2], '_blank');
+            }
+        }
+        
+        // Also show the message for manual copy
+        setTimeout(() => {
+            const copyText = `Copy this message and send it on WhatsApp:\n\n${message}`;
+            if (confirm(copyText + '\n\nClick OK to copy to clipboard')) {
+                navigator.clipboard.writeText(message).then(() => {
+                    alert('Message copied! Now paste it in WhatsApp.');
+                });
+            }
+        }, 1000);
+    }
+
+    async sendTelegramReminder(reminder) {
+        // Check if Telegram is set up
+        if (!localStorage.getItem('telegramSetup')) {
+            alert('📲 Telegram Setup Required:\n\n1. Open Telegram app\n2. Search for "MediRemainder Bot"\n3. Send /start to the bot\n4. Click "Setup Telegram" button below\n\nThis is a one-time setup!');
+            return;
+        }
+        
+        const message = `💊 *Medication Reminder*
+
+Time to take: *${reminder.medication}*
+Dosage: *${reminder.dose}*
+Date: *${reminder.date}*
+Time: *${reminder.time}*
+
+Stay healthy! 🏥`;
+        
+        try {
+            const response = await fetch(`https://api.telegram.org/bot${this.telegramToken}/sendMessage`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ 
+                    chat_id: '1416253224', 
+                    text: message, 
+                    parse_mode: 'Markdown' 
+                })
+            });
+            
+            if (response.ok) {
+                console.log('✅ Telegram reminder sent successfully!');
+                alert('✅ Telegram notification sent! Check your Telegram app.');
+            } else {
+                console.log('❌ Failed to send Telegram reminder');
+                alert('❌ Telegram failed. Please check your setup.');
+            }
+        } catch (error) {
+            console.error('Telegram error:', error);
+            alert('❌ Telegram error. Please try the setup again.');
+        }
+    }
+
+    updateStats() {
+        const active = this.reminders.filter(r => r.status === 'active').length;
+        const today = new Date().toISOString().split('T')[0];
+        const todayCount = this.reminders.filter(r => r.date === today && r.status === 'active').length;
+        
+        // Update stats if elements exist
+        const totalEl = document.getElementById('totalReminders');
+        const todayEl = document.getElementById('todayReminders');
+        if (totalEl) totalEl.textContent = active;
+        if (todayEl) todayEl.textContent = todayCount;
+    }
+
+    // Simple reminder for old people
+    quickReminder() {
+        const medication = prompt('💊 What medicine? (e.g., Paracetamol):') || 'Paracetamol';
+        const dose = prompt('💉 How much? (e.g., 500mg):') || '500mg';
+        const phone = prompt('📱 Your phone number (with country code like +1234567890):') || '+1234567890';
+        
+        // Set reminder for 1 minute from now for testing
+        const now = new Date();
+        const reminderTime = new Date(now.getTime() + 60000); // 1 minute from now
+        const date = reminderTime.toISOString().split('T')[0];
+        const time = reminderTime.toTimeString().slice(0,5);
+        
+        this.addReminder(medication, dose, date, time, phone);
+    }
 }
+
+// Initialize app
+const app = new MediRemainder();
+
+// Add notification toggle function
+function toggleNotification(element, type) {
+    const checkbox = element.querySelector('input[type="checkbox"]');
+    checkbox.checked = !checkbox.checked;
+    
+    if (checkbox.checked) {
+        element.classList.add('selected');
+    } else {
+        element.classList.remove('selected');
+    }
+}
+
+// Setup Telegram function - Super simple for old people
+function setupTelegram() {
+    const setup = confirm(`📲 Telegram Setup (One-time only):
+
+1. Open Telegram app on your phone
+2. Search for "MediRemainder Bot" 
+3. Send /start to the bot
+4. Click OK when done
+
+This setup is needed only once!`);
+    
+    if (setup) {
+        localStorage.setItem('telegramSetup', 'true');
+        alert('✅ Telegram setup complete!\n\nNow you will get medication reminders on Telegram automatically.\n\nTest it by adding a reminder!');
+    }
+}
+
+// Test WhatsApp function
+function testWhatsApp() {
+    const phone = prompt('Enter your phone number (with country code like +919876543210):') || '+919876543210';
+    const message = '💊 Test message from MediRemainder!\n\nThis is a test to check if WhatsApp is working correctly.';
+    
+    // Clean phone number
+    let cleanPhone = phone.replace(/\D/g, '');
+    if (!cleanPhone.startsWith('91') && cleanPhone.length === 10) {
+        cleanPhone = '91' + cleanPhone;
+    }
+    
+    // Try WhatsApp
+    const whatsappUrl = `https://wa.me/${cleanPhone}?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, '_blank');
+    
+    // Also show manual option
+    setTimeout(() => {
+        if (confirm('If WhatsApp didn\'t open, click OK to copy the message manually')) {
+            navigator.clipboard.writeText(message).then(() => {
+                alert('Message copied! Open WhatsApp and paste it.');
+            });
+        }
+    }, 2000);
+}
+
+// Initialize app when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    // App is already initialized above
+});
 </script>
 
 </body>
